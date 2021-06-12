@@ -34,14 +34,14 @@ public class AccountRepository implements IAccountRepository {
 set search_path = 'reward2'
 CREATE OR REPLACE FUNCTION SP_ACCOUNT_UPSAVING(
 	psavings numeric,
-	pcredit_card varchar
+	pnumber varchar
 )
 RETURNS void AS $$
 DECLARE dsaving numeric;
 BEGIN
-
-    SELECT savings FROM t_account INTO dsaving  WHERE credit_card = pcredit_card;
-	UPDATE t_account SET savings = dsaving + psavings WHERE credit_card = pcredit_card;
+	
+    SELECT savings FROM t_account INTO dsaving  WHERE number = pnumber;	
+	UPDATE t_account SET savings = dsaving + psavings WHERE number = pnumber;
 END;
 $$ LANGUAGE plpgsql;
 
